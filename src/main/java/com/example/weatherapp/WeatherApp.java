@@ -35,13 +35,15 @@ public class WeatherApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, AWTException {
-        if (SCREEN_WIDTH < 2560.0 && SCREEN_HEIGHT < 1440.0) {
-            WINDOW_WIDTH = 1125;
-            WINDOW_HEIGHT = 750;
-        } else {
-            WINDOW_WIDTH = 1500;
-            WINDOW_HEIGHT = 1000;
-        }
+//        if (SCREEN_WIDTH < 2560.0 && SCREEN_HEIGHT < 1440.0) {
+//            WINDOW_WIDTH = 1125;
+//            WINDOW_HEIGHT = 750;
+//        } else {
+//            WINDOW_WIDTH = 1500;
+//            WINDOW_HEIGHT = 1000;
+//        }
+        WINDOW_WIDTH = 1200;
+        WINDOW_HEIGHT = 800;
         System.setProperty("prism.lcdtext", "false");
         // applying the FXML
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AppFXML.fxml"));
@@ -110,8 +112,8 @@ public class WeatherApp extends Application {
         ImageView clouds = (ImageView) scene.lookup("#clouds");
         clouds.setFitWidth(WINDOW_WIDTH);
         Rectangle clipRect = controller.clipRect;
-        clipRect.setArcWidth(15);
-        clipRect.setArcHeight(15);
+        clipRect.setArcWidth(20);
+        clipRect.setArcHeight(20);
     }
 
     // Converting background image to fullscreen

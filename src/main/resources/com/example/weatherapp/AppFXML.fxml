@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,19 +20,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainAnchorPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapp.AppController">
+<AnchorPane fx:id="MainAnchorPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.weatherapp.AppController">
     <children>
-        <ImageView fx:id="clouds" blendMode="MULTIPLY" fitWidth="1500.0" layoutY="-300.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false" style="-fx-border-radius: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <ImageView fx:id="clouds" blendMode="MULTIPLY" fitWidth="1200.0" layoutY="-200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false" style="-fx-border-radius: 10;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <image>
                 <Image url="@../../../images/assets/asset-clouds-4.jpg" />
             </image>
-            <effect>
-                <ColorAdjust brightness="-0.05" />
-            </effect>
         </ImageView>
         <HBox fx:id="TitleBar" alignment="CENTER" onMouseDragged="#moveWindow" onMousePressed="#dragWindow" prefHeight="50.0" prefWidth="1500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView id="appIcon" fx:id="appIcon" fitHeight="50.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView id="appIcon" fx:id="appIcon" fitHeight="50.0" fitWidth="286.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/kumorika-title-logo-white.png" />
                     </image>
@@ -41,7 +37,7 @@
                         <Insets left="5.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <Region fx:id="upperRegion1" minWidth="308.0" prefHeight="50.0" prefWidth="363.0" HBox.hgrow="ALWAYS" />
+                <Region fx:id="upperRegion1" minWidth="38.0" prefHeight="55.0" prefWidth="59.0" HBox.hgrow="ALWAYS" />
                 <AnchorPane fx:id="searchBarAnchorPane" maxWidth="415.0" prefHeight="50.0" prefWidth="415.0">
                     <children>
                         <TextField fx:id="searchBarTextField" alignment="CENTER" layoutY="11.0" maxWidth="415.0" minWidth="415.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter location (e.g. Osaka, Japan)">
@@ -49,8 +45,8 @@
                         <Button fx:id="searchButton" layoutX="394.0" layoutY="19.0" maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" onAction="#searchLocation" prefHeight="15.0" prefWidth="15.0" />
                     </children>
                 </AnchorPane>
-                <Region minWidth="428.0" prefHeight="55.0" prefWidth="428.0" HBox.hgrow="ALWAYS" />
-                <HBox fx:id="TitleBarButtons" alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="1.7976931348623157E308" minWidth="91.0" prefHeight="50.0" prefWidth="109.0" spacing="9.0" HBox.hgrow="NEVER">
+                <Region minWidth="102.0" prefHeight="55.0" prefWidth="102.0" HBox.hgrow="ALWAYS" />
+                <HBox fx:id="TitleBarButtons" alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="1.7976931348623157E308" minWidth="100.0" prefHeight="50.0" prefWidth="114.0" spacing="9.0" HBox.hgrow="NEVER">
                     <children>
                         <ToggleButton fx:id="implicitExitToggle" maxHeight="18.0" maxWidth="18.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" text="*">
                             <cursor>
@@ -59,19 +55,26 @@
                         </ToggleButton>
                         <Button id="MinimizeButton" fx:id="MinimizeButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimize" prefHeight="18.0" prefWidth="18.0">
                         </Button>
-                        <Button id="FullScreenButton" fx:id="FullScreenButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchFullScreen" prefHeight="18.0" prefWidth="18.0" />
+                        <Button id="FullScreenButton" fx:id="FullScreenButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="18.0" />
                         <Button id="ExitButton" fx:id="ExitButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#exit" prefHeight="18.0" prefWidth="18.0" styleClass="button" />
                     </children>
                 </HBox>
             </children>
         </HBox>
         <Region layoutX="250.0" layoutY="580.0" prefHeight="50.0" prefWidth="1000.0" />
-        <Region layoutX="250.0" layoutY="950.0" prefHeight="50.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" />
-        <HBox fx:id="CurrentDailyHBox" layoutX="330.0" layoutY="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="530.0" minWidth="840.0" prefHeight="530.0" prefWidth="840.0" styleClass="ContentHBox" AnchorPane.bottomAnchor="413.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="57.0">
+        <Region layoutX="26.0" layoutY="760.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="1000.0" AnchorPane.bottomAnchor="-10.0" />
+        <HBox fx:id="CurrentDailyHBox" layoutX="194.0" layoutY="57.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="478.0" minWidth="821.0" prefHeight="486.0" prefWidth="821.0" styleClass="ContentHBox" AnchorPane.bottomAnchor="257.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="57.0">
             <children>
-                <VBox fx:id="currentVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="600.0" minHeight="530.0" minWidth="420.0" prefHeight="530.0" prefWidth="420.0" HBox.hgrow="ALWAYS">
-                    <children>
-                        <GridPane fx:id="currentUpperGridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="265.0" prefWidth="418.0" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="currentGridPane" prefHeight="449.0" prefWidth="399.0" HBox.hgrow="ALWAYS">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" percentHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                        <GridPane fx:id="currentUpperGridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="210.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="210.0" />
@@ -85,13 +88,13 @@
                                     <font>
                                         <Font size="24.0" />
                                     </font>
-                                    <padding>
-                                        <Insets bottom="20.0" />
-                                    </padding>
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
                                 </Label>
                                 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
-                                        <Label fx:id="currentTempLabel" alignment="BOTTOM_RIGHT" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="50.0" prefWidth="208.0" styleClass="LABEL" text="-°C" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                        <Label fx:id="currentTempLabel" alignment="BOTTOM_RIGHT" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="50.0" prefWidth="208.0" styleClass="LABEL" text="-°C" textAlignment="CENTER" textFill="WHITE" translateY="10.0" VBox.vgrow="ALWAYS">
                                             <font>
                                                 <Font size="50.0" />
                                             </font>
@@ -105,7 +108,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Label>
-                                        <Label fx:id="currentStateLabel" alignment="TOP_RIGHT" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="0.0" prefHeight="70.0" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="RIGHT" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                                        <Label fx:id="currentStateLabel" alignment="TOP_RIGHT" contentDisplay="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="0.0" prefHeight="70.0" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="RIGHT" textFill="WHITE" translateY="10.0" wrapText="true" VBox.vgrow="ALWAYS">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -121,9 +124,9 @@
                                         </Label>
                                     </children>
                                 </VBox>
-                                <StackPane fx:id="currentIconStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <StackPane fx:id="currentIconStackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" translateY="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
-                                        <ImageView fx:id="currentIcon" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" scaleX="0.6" scaleY="0.6" scaleZ="0.6" StackPane.alignment="CENTER">
+                                        <ImageView fx:id="currentIcon" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" scaleX="0.6" scaleY="0.6" scaleZ="0.6" StackPane.alignment="CENTER">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-fallback.png" />
                                             </image>
@@ -141,7 +144,7 @@
                                 </StackPane>
                             </children>
                         </GridPane>
-                        <GridPane fx:id="currentLowerGridPane" minHeight="265.0" VBox.vgrow="ALWAYS">
+                        <GridPane fx:id="currentLowerGridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="265.0" GridPane.rowIndex="1">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -151,7 +154,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="3.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
@@ -164,8 +167,14 @@
                                             </font>
                                         </Label>
                                     </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets left="20.0" top="20.0" />
+                           </padding>
                                 </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="3.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
@@ -178,8 +187,11 @@
                                             </font>
                                         </Label>
                                     </children>
+                           <padding>
+                              <Insets left="-20.0" top="20.0" />
+                           </padding>
                                 </VBox>
-                                <VBox fx:id="currentPressureVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#switchPressureUnits" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <VBox fx:id="currentPressureVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#switchPressureUnits" prefHeight="200.0" prefWidth="100.0" spacing="3.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
@@ -195,8 +207,11 @@
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" />
+                           </padding>
                                 </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="3.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
@@ -209,20 +224,23 @@
                                             </font>
                                         </Label>
                                     </children>
+                           <padding>
+                              <Insets bottom="20.0" left="-20.0" />
+                           </padding>
                                 </VBox>
                             </children>
                         </GridPane>
-                    </children>
-                </VBox>
-                <GridPane fx:id="dailyGridPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="420.0" HBox.hgrow="ALWAYS">
+               </children>
+            </GridPane>
+                <GridPane fx:id="dailyGridPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="100.0" />
                         <ColumnConstraints fx:id="dailyGridPaneColumn2" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="0.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" percentHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="55.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <GridPane fx:id="dailyUpperGridPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="420.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -239,7 +257,7 @@
                                         <Font size="24.0" />
                                     </font>
                                     <padding>
-                                        <Insets bottom="20.0" right="20.0" />
+                                        <Insets bottom="20.0" />
                                     </padding>
                                 </Label>
                             </children>
@@ -259,11 +277,17 @@
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-35-1.png" />
                                             </image>
+                                 <VBox.margin>
+                                    <Insets left="15.0" />
+                                 </VBox.margin>
                                         </ImageView>
                                         <Label fx:id="UVLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
+                                 <VBox.margin>
+                                    <Insets left="15.0" />
+                                 </VBox.margin>
                                         </Label>
                                     </children>
                                 </VBox>
@@ -273,11 +297,17 @@
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/moon-phases/ui-icon-waning-gibbous.png" />
                                             </image>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </ImageView>
                                         <Label fx:id="moonLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </Label>
                                     </children>
                                 </VBox>
@@ -285,7 +315,7 @@
                         </GridPane>
                         <GridPane fx:id="dailyLowerGridPane" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
@@ -300,7 +330,7 @@
                                         <Font size="24.0" />
                                     </font>
                                     <padding>
-                                        <Insets bottom="5.0" left="30.0" />
+                                        <Insets bottom="5.0" left="25.0" />
                                     </padding>
                                     <styleClass>
                                         <String fx:value="LABEL" />
@@ -312,7 +342,7 @@
                                         <Font size="24.0" />
                                     </font>
                                     <padding>
-                                        <Insets bottom="5.0" left="30.0" />
+                                        <Insets bottom="5.0" left="25.0" />
                                     </padding>
                                     <styleClass>
                                         <String fx:value="LABEL" />
@@ -324,7 +354,7 @@
                                         <Font size="24.0" />
                                     </font>
                                     <padding>
-                                        <Insets bottom="5.0" left="30.0" />
+                                        <Insets bottom="5.0" left="25.0" />
                                     </padding>
                                     <styleClass>
                                         <String fx:value="LABEL" />
@@ -336,21 +366,21 @@
                                         <Font size="24.0" />
                                     </font>
                                     <padding>
-                                        <Insets bottom="5.0" left="30.0" />
+                                        <Insets bottom="5.0" left="25.0" />
                                     </padding>
                                     <styleClass>
                                         <String fx:value="LABEL" />
                                         <String fx:value="dayPartLabel" />
                                     </styleClass>
                                 </Label>
-                                <HBox fx:id="dayPartHBox1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <HBox fx:id="dayPartHBox1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="morningTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minWidth="65.0" styleClass="LABEL" text="69°C" textFill="WHITE" HBox.hgrow="ALWAYS">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
                                         </Label>
-                                        <ImageView fx:id="morningWeatherIcon" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
+                                        <ImageView fx:id="morningWeatherIcon" fitHeight="35.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                                             </image>
@@ -362,14 +392,14 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="dayPartHBox2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <HBox fx:id="dayPartHBox2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="middayTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minWidth="65.0" styleClass="LABEL" text="69°C" textFill="WHITE" HBox.hgrow="ALWAYS">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
                                         </Label>
-                                        <ImageView fx:id="middayWeatherIcon" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
+                                        <ImageView fx:id="middayWeatherIcon" fitHeight="35.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                                             </image>
@@ -381,14 +411,14 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="dayPartHBox3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <HBox fx:id="dayPartHBox3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="eveningTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minWidth="65.0" styleClass="LABEL" text="69°C" textFill="WHITE" HBox.hgrow="ALWAYS">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
                                         </Label>
-                                        <ImageView fx:id="eveningWeatherIcon" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
+                                        <ImageView fx:id="eveningWeatherIcon" fitHeight="35.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                                             </image>
@@ -400,14 +430,14 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <HBox fx:id="dayPartHBox4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <HBox fx:id="dayPartHBox4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" styleClass="dayPartHBox" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
                                         <Label fx:id="nighttimeTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minWidth="65.0" styleClass="LABEL" text="-69°C" textFill="WHITE" HBox.hgrow="ALWAYS">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
                                         </Label>
-                                        <ImageView fx:id="nighttimeWeatherIcon" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
+                                        <ImageView fx:id="nighttimeWeatherIcon" fitHeight="35.0" pickOnBounds="true" preserveRatio="true" translateY="-5.0" HBox.hgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                                             </image>
@@ -421,7 +451,7 @@
                                 </HBox>
                             </children>
                         </GridPane>
-                        <GridPane fx:id="dailyLowerGridPane2" minHeight="265.0" minWidth="400.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <GridPane fx:id="dailyLowerGridPane2" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -434,20 +464,20 @@
                             <children>
                                 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="borderableVBox" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                        <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-27.png" />
                                             </image>
                                             <VBox.margin>
-                                                <Insets right="40.0" />
+                                                <Insets right="10.0" />
                                             </VBox.margin>
                                         </ImageView>
-                                        <Label fx:id="sunriseLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                        <Label fx:id="sunriseLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
                                             <VBox.margin>
-                                                <Insets right="40.0" />
+                                                <Insets right="10.0" />
                                             </VBox.margin>
                                         </Label>
                                     </children>
@@ -455,34 +485,63 @@
                                         <Insets bottom="10.0" />
                                     </padding>
                                 </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                        <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-28.png" />
                                             </image>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </ImageView>
-                                        <Label fx:id="sunsetLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                        <Label fx:id="sunsetLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </Label>
                                     </children>
-                                    <padding>
-                                        <Insets bottom="10.0" />
-                                    </padding>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
                                 </VBox>
-                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                     <children>
-                                        <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                        <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-39.png" />
                                             </image>
                                             <VBox.margin>
+                                                <Insets right="10.0" />
+                                            </VBox.margin>
+                                        </ImageView>
+                                        <Label fx:id="maxTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets right="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                    </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                                </VBox>
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" styleClass="borderableVBox" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                    <children>
+                                        <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                            <image>
+                                                <Image url="@../../../images/UI-Icons/ui-icon-40.png" />
+                                            </image>
+                                            <VBox.margin>
                                                 <Insets />
                                             </VBox.margin>
                                         </ImageView>
-                                        <Label fx:id="maxTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                        <Label fx:id="minTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
@@ -492,59 +551,51 @@
                                         </Label>
                                     </children>
                                 </VBox>
-                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" styleClass="borderableVBox" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
-                                            <image>
-                                                <Image url="@../../../images/UI-Icons/ui-icon-40.png" />
-                                            </image>
-                                 <VBox.margin>
-                                    <Insets right="40.0" />
-                                 </VBox.margin>
-                                        </ImageView>
-                                        <Label fx:id="minTempLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                 <VBox.margin>
-                                    <Insets right="40.0" />
-                                 </VBox.margin>
-                                        </Label>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="2">
-                                    <children>
-                                        <ImageView fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                        <ImageView fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-41.png" />
                                             </image>
+                                 <VBox.margin>
+                                    <Insets left="15.0" />
+                                 </VBox.margin>
                                         </ImageView>
-                                        <Label fx:id="precipitationProbabilityLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                        <Label fx:id="precipitationProbabilityLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
+                                 <VBox.margin>
+                                    <Insets left="15.0" />
+                                 </VBox.margin>
                                         </Label>
                                     </children>
                                     <padding>
                                         <Insets bottom="10.0" />
                                     </padding>
                                 </VBox>
-                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
-                                        <ImageView fx:id="maxWindSpeedImage" fitHeight="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
+                                        <ImageView fx:id="maxWindSpeedImage" fitHeight="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: red;" VBox.vgrow="ALWAYS">
                                             <image>
                                                 <Image url="@../../../images/UI-Icons/ui-icon-42-1.png" />
                                             </image>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </ImageView>
-                                        <Label fx:id="maxWindSpeedLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="210.0" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                        <Label fx:id="maxWindSpeedLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="LABEL" text="•••" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                             <font>
                                                 <Font size="20.0" />
                                             </font>
+                                 <VBox.margin>
+                                    <Insets right="15.0" />
+                                 </VBox.margin>
                                         </Label>
                                     </children>
-                                    <padding>
-                                        <Insets bottom="10.0" />
-                                    </padding>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
                                 </VBox>
                             </children>
                         </GridPane>
@@ -552,16 +603,16 @@
                 </GridPane>
             </children>
         </HBox>
-        <HBox fx:id="ForecastHBox" alignment="CENTER" layoutX="50.0" layoutY="630.0" maxHeight="323.0" maxWidth="1800.0" minWidth="1148.0" prefHeight="320.0" prefWidth="1400.0" styleClass="ContentHBox" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <HBox fx:id="ForecastHBox" alignment="CENTER" layoutX="48.0" layoutY="571.0" maxHeight="323.0" maxWidth="1800.0" minWidth="1100.0" prefHeight="188.0" prefWidth="1100.0" styleClass="ContentHBox" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
             <children>
                 <VBox fx:id="day0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="firstVBox" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day0Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day0Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day0Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                        <ImageView fx:id="day0Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -578,12 +629,12 @@
                 </VBox>
                 <VBox fx:id="day1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day1Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day1Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day1Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                        <ImageView fx:id="day1Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -600,12 +651,12 @@
                 </VBox>
                 <VBox fx:id="day2" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day2Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day2Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day2Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="day2Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -622,12 +673,12 @@
                 </VBox>
                 <VBox fx:id="day3" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day3Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day3Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day3Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="day3Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -644,12 +695,12 @@
                 </VBox>
                 <VBox fx:id="day4" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day4Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day4Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day4Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="day4Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -666,12 +717,12 @@
                 </VBox>
                 <VBox fx:id="day5" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day5Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day5Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day5Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="day5Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>
@@ -688,12 +739,12 @@
                 </VBox>
                 <VBox fx:id="day6" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="lastVBox" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label fx:id="day6Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00.0000" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label fx:id="day6Date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="LABEL" text="00.00" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                             <font>
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <ImageView fx:id="day6Icon" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="day6Icon" fitHeight="50.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/UI-Icons/ui-icon-23.png" />
                             </image>

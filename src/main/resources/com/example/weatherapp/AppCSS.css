@@ -113,7 +113,7 @@
     -fx-border-style: solid;
     -fx-border-width: 0 0 0 2;
     -fx-border-color: rgba(255, 255, 255, 0.35);
-    -fx-border-insets: 0 0 0 40;
+    -fx-border-insets: 0 0 0 30;
 }
 
 #day0 {

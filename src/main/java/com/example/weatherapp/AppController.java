@@ -7,15 +7,12 @@ import com.example.weatherapp.dataClasses.MoonhaseData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
@@ -42,13 +39,14 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 
 public class AppController implements Initializable {
     protected double xOffset = 0;
     protected double yOffset = 0;
     protected double fontSizeSmall = 15;
-    protected double fontSizeNormal = 25;
+    protected double fontSizeNormal = 23;
     protected double fontSizeHuge = 55;
     protected double fontSizeFullScreen = 85;
     protected boolean setToKeepInTray = true;
@@ -112,7 +110,7 @@ public class AppController implements Initializable {
     @FXML
     private RowConstraints currentUpperGridPaneRow0;
     @FXML
-    private VBox currentVBox;
+    private GridPane currentGridPane;
     @FXML
     private VBox addVBox;
     @FXML
@@ -248,13 +246,11 @@ public class AppController implements Initializable {
         // Clipping a background image
         clipRect.setWidth(WeatherApp.WINDOW_WIDTH);
         clipRect.setHeight(WeatherApp.WINDOW_HEIGHT);
-        clipRect.setArcHeight(15);
-        clipRect.setArcWidth(15);
-        clipRect.setTranslateY(300);
+        clipRect.setArcHeight(20);
+        clipRect.setArcWidth(20);
+        clipRect.setTranslateY(200);
 
-//        System.out.println("I WANT TO FUCKING COMMIT THE PROJECT, NOT A SINGLE RANDOM FILE FROM WHEREEVER THE FUCK YOU PICK IT FROM.");
-
-        clouds.setTranslateY(300);
+        clouds.setTranslateY(200);
         clouds.setFitWidth(WeatherApp.WINDOW_WIDTH);
 
         clouds.setClip(clipRect);
@@ -264,7 +260,7 @@ public class AppController implements Initializable {
         clouds.setClip(null);
         clouds.setImage(image);
 
-        currentLocationLabel.setPrefWidth(currentVBox.getWidth() / 2 - 50);
+        currentLocationLabel.setPrefWidth(currentGridPane.getWidth() / 2 - 50);
         currentStateLabel.setWrapText(true);
 
         //Setting events
@@ -274,12 +270,39 @@ public class AppController implements Initializable {
                 node.setOnMouseExited(event -> outTransition(node));
             }
         }
+        AtomicLong FSLastCall = new AtomicLong();
         //
-        TitleBar.setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getClickCount() == 2) {
-                switchFullScreen();
+        FullScreenButton.setOnMouseEntered(event -> {
+            long coolDown = 500;
+            long time = System.currentTimeMillis();
+            if (time > FSLastCall.get() + coolDown) {
+                shake(FullScreenButton);
+                final Animation animation = new Transition() {
+                    {
+                        setCycleDuration(Duration.millis(200));
+                        setInterpolator(Interpolator.EASE_OUT);
+                    }
+
+                    @Override
+                    protected void interpolate(double frac) {
+                        Color vColor = Color.web("F3455C", .8);
+                        FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
+                    }
+                };
+                animation.play();
+                FSLastCall.set(time);
             }
+
         });
+        FullScreenButton.setOnMouseExited(e -> {
+            Color vColor = Color.web("FFFFFF", 1);
+            FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
+        });
+        TitleBarButtons.setOnMouseExited(e -> {
+            Color vColor = Color.web("FFFFFF", 1);
+            FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
+        });
+        //
 
         currentPressureVBox.setOnMouseEntered(event -> upTransition(currentPressureVBox));
         currentPressureVBox.setOnMouseExited(event -> downTransition(currentPressureVBox));
@@ -877,10 +900,10 @@ public class AppController implements Initializable {
     }
 
     private void setHourlyData(double[] HTempArray, int[] HWeatherCodeArray, double[] HWindSpeedArray, int pickedDayOfWeek) {
-        morningTempLabel.setText(HTempArray[getHourlyIndex(0, pickedDayOfWeek)] + "°C");
-        middayTempLabel.setText(HTempArray[getHourlyIndex(1, pickedDayOfWeek)] + "°C");
-        eveningTempLabel.setText(HTempArray[getHourlyIndex(2, pickedDayOfWeek)] + "°C");
-        nighttimeTempLabel.setText(HTempArray[getHourlyIndex(3, pickedDayOfWeek)] + "°C");
+        morningTempLabel.setText(HTempArray[getHourlyIndex(0, pickedDayOfWeek)] + "°");
+        middayTempLabel.setText(HTempArray[getHourlyIndex(1, pickedDayOfWeek)] + "°");
+        eveningTempLabel.setText(HTempArray[getHourlyIndex(2, pickedDayOfWeek)] + "°");
+        nighttimeTempLabel.setText(HTempArray[getHourlyIndex(3, pickedDayOfWeek)] + "°");
         //
         morningWindSpeedLabel.setText(HWindSpeedArray[getHourlyIndex(0, pickedDayOfWeek)] + "  m/s");
         middayWindSpeedLabel.setText(HWindSpeedArray[getHourlyIndex(1, pickedDayOfWeek)] + " m/s");
@@ -1021,7 +1044,7 @@ public class AppController implements Initializable {
     }
 
     protected void expand() {
-        currentVBox.setMaxWidth(420);
+        currentGridPane.setMaxWidth(380);
         AnchorPane.setLeftAnchor(CurrentDailyHBox, 50.0);
         AnchorPane.setRightAnchor(CurrentDailyHBox, 50.0);
         dailyGridPane.getColumnConstraints().get(0).setPercentWidth(50);
@@ -1037,9 +1060,9 @@ public class AppController implements Initializable {
     }
 
     protected void shrink() {
-        currentVBox.setMaxWidth(600);
-        AnchorPane.setLeftAnchor(CurrentDailyHBox, 330.0);
-        AnchorPane.setRightAnchor(CurrentDailyHBox, 330.0);
+        currentGridPane.setMaxWidth(Double.MAX_VALUE);
+        AnchorPane.setLeftAnchor(CurrentDailyHBox, 190.0);
+        AnchorPane.setRightAnchor(CurrentDailyHBox, 190.0);
         dailyGridPane.getColumnConstraints().get(0).setPercentWidth(100);
         dailyGridPane.getColumnConstraints().get(1).setPercentWidth(0);
         dailyLowerGridPane2.setVisible(false);
@@ -1053,173 +1076,169 @@ public class AppController implements Initializable {
     // Changing fields to display fullscreen mode properly
     @FXML
     public void switchFullScreen() {
-        Stage stage = (Stage) MainAnchorPane.getScene().getWindow();
-        if (stage.isFullScreen()) {
-            // FROM FULLSCREEN
-            clipRect.setArcHeight(15);
-            clipRect.setArcWidth(15);
-
-            upperRegion1.setPrefWidth(363);
-
-            for (Node currentLowerDataVBox : currentLowerGridPane.getChildren()) {
-                for (Node currentDataIcon : ((VBox) currentLowerDataVBox).getChildren()) {
-                    if (currentDataIcon instanceof ImageView) {
-                        scaleTo(currentDataIcon, 1);
-                        currentDataIcon.setTranslateY(0);
-                    }
-                }
-            }
-            for (Node dailyLowerDataVBox2 : dailyLowerGridPane2.getChildren()) {
-                for (Node dailyDataIcon : ((VBox) dailyLowerDataVBox2).getChildren()) {
-                    if (dailyDataIcon instanceof ImageView) {
-                        scaleTo(dailyDataIcon, 1);
-                        dailyDataIcon.setTranslateY(0);
-                    }
-                }
-            }
-            for (Node dailyLowerDataHBox : dailyLowerGridPane.getChildren()) {
-                if (dailyLowerDataHBox instanceof HBox) {
-                    ((HBox) dailyLowerDataHBox).setSpacing(20);
-                    for (Node hourlyDataIcon : ((HBox) dailyLowerDataHBox).getChildren()) {
-                        if (hourlyDataIcon instanceof ImageView) {
-                            scaleTo(hourlyDataIcon, 1);
-                        }
-                    }
-                }
-            }
-            scaleTo(currentIcon, .6);
-            scaleTo(UVIcon, 1);
-            scaleTo(moonIcon, 1);
-            UVIcon.setTranslateY(0);
-            moonIcon.setTranslateY(0);
-            UVVBox.setPadding(new Insets(0, 0, 15, 0));
-            moonVBox.setPadding(new Insets(0, 0, 15, 0));
-
-            for (Node node : dailyLowerGridPane.getChildren()) {
-                if (node instanceof Label) {
-                    ((Label) node).setAlignment(Pos.CENTER_LEFT);
-                } else if (node instanceof HBox) {
-                    ((HBox) node).setAlignment(Pos.CENTER);
-                }
-            }
-
-            CurrentDailyHBox.setStyle("-fx-background-radius: 10;");
-            ForecastHBox.setStyle("-fx-background-radius: 10;");
-            day0.setStyle("-fx-background-radius: 10 0 0 10;");
-            day6.setStyle("-fx-background-radius: 0 10 10 0;");
-
-            setFonts(SFProHeavyHuge, SFProRegularUnderNormal);
-            currentLocationLabel.setFont(SFProBoldUnderNormal);
-            dateLabel.setFont(SFProBoldUnderNormal);
-            for (Label label : new Label[]{dayPartLabel1, dayPartLabel2, dayPartLabel3, dayPartLabel4})
-                label.setFont(SFProBoldUnderNormal);
-            for (int i = 0; i < 7; i++) {
-                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(0)).setFont(SFProBoldUnderNormal);
-                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(2)).setFont(SFProRegularUnderNormal);
-            }
-
-            dailyGridPane.getColumnConstraints().get(0).setPercentWidth(100);
-            dailyGridPane.getColumnConstraints().get(1).setPercentWidth(0);
-            dailyLowerGridPane2.setVisible(false);
-            GridPane.setColumnSpan(dailyUpperGridPane, 1);
-            GridPane.setColumnIndex(dailyMiddleGridPane, 0);
-            GridPane.setRowIndex(dailyLowerGridPane, 2);
-            GridPane.setRowSpan(dailyLowerGridPane, 1);
-            if (isExpanded) {
-                expand();
-                isExpanded = true;
-            }
-
-            dayPartLabel1.setText(dayPartLabel1.getText().substring(0, dayPartLabel1.getText().length() - 6));
-            dayPartLabel2.setText(dayPartLabel2.getText().substring(0, dayPartLabel2.getText().length() - 6));
-            dayPartLabel3.setText(dayPartLabel3.getText().substring(0, dayPartLabel3.getText().length() - 6));
-            dayPartLabel4.setText(dayPartLabel4.getText().substring(0, dayPartLabel4.getText().length() - 6));
-        } else {
-            // TO FULLSCREEN
-            clipRect.setArcHeight(0);
-            clipRect.setArcWidth(0);
-
-            upperRegion1.setPrefWidth(353);
-
-            for (Node currentLowerDataVBox : currentLowerGridPane.getChildren()) {
-                for (Node currentDataIcon : ((VBox) currentLowerDataVBox).getChildren()) {
-                    if (currentDataIcon instanceof ImageView) {
-                        scaleTo(currentDataIcon, 1.5);
-                        currentDataIcon.setTranslateY(-15);
-                    }
-                }
-            }
-            for (Node dailyLowerDataVBox2 : dailyLowerGridPane2.getChildren()) {
-                for (Node dailyDataIcon : ((VBox) dailyLowerDataVBox2).getChildren()) {
-                    if (dailyDataIcon instanceof ImageView) {
-                        scaleTo(dailyDataIcon, 1.5);
-                        dailyDataIcon.setTranslateY(-15);
-                    }
-                }
-            }
-            for (Node dailyLowerDataHBox : dailyLowerGridPane.getChildren()) {
-                if (dailyLowerDataHBox instanceof HBox) {
-                    ((HBox) dailyLowerDataHBox).setSpacing(40);
-                    for (Node hourlyDataIcon : ((HBox) dailyLowerDataHBox).getChildren()) {
-                        if (hourlyDataIcon instanceof ImageView) {
-                            scaleTo(hourlyDataIcon, 1.5);
-                        }
-                    }
-                }
-            }
-
-            scaleTo(currentIcon, 1);
-            scaleTo(UVIcon, 1.5);
-            scaleTo(moonIcon, 1.5);
-            UVIcon.setTranslateY(-15);
-            moonIcon.setTranslateY(-15);
-            UVVBox.setPadding(new Insets(0));
-            moonVBox.setPadding(new Insets(0));
-
-            for (Node node : dailyLowerGridPane.getChildren()) {
-                if (node instanceof Label) {
-                    ((Label) node).setAlignment(Pos.CENTER);
-                } else if (node instanceof HBox) {
-                    ((HBox) node).setAlignment(Pos.CENTER);
-                }
-            }
-
-            CurrentDailyHBox.setStyle("-fx-background-radius: 20;");
-            ForecastHBox.setStyle("-fx-background-radius: 20;");
-            day0.setStyle("-fx-background-radius: 20 0 0 20;");
-            day6.setStyle("-fx-background-radius: 0 20 20 0;");
-
-            setFonts(SFProHeavyFullScreen, SFProRegularNormal);
-            currentLocationLabel.setFont(SFProBoldNormal);
-            dateLabel.setFont(SFProBoldNormal);
-            for (Label label : new Label[]{dayPartLabel1, dayPartLabel2, dayPartLabel3, dayPartLabel4})
-                label.setFont(SFProBoldNormal);
-            for (int i = 0; i < 7; i++) {
-                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(0)).setFont(SFProBoldNormal);
-                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(2)).setFont(SFProRegularNormal);
-            }
-            MainAnchorPane.requestFocus();
-
-            currentVBox.setMaxWidth(600);
-            AnchorPane.setLeftAnchor(CurrentDailyHBox, 330.0);
-            AnchorPane.setRightAnchor(CurrentDailyHBox, 330.0);
-
-            dailyGridPane.getColumnConstraints().get(0).setPercentWidth(50);
-            dailyGridPane.getColumnConstraints().get(1).setPercentWidth(50);
-            dailyGridPane.getRowConstraints().get(1).setPercentHeight(20);
-            dailyGridPane.getRowConstraints().get(2).setPercentHeight(60);
-            GridPane.setColumnSpan(dailyUpperGridPane, 2);
-            GridPane.setColumnIndex(dailyMiddleGridPane, 1);
-            GridPane.setRowIndex(dailyLowerGridPane, 1);
-            GridPane.setRowSpan(dailyLowerGridPane, 2);
-            dailyLowerGridPane2.setVisible(true);
-
-            dayPartLabel1.setText(dayPartLabel1.getText() + "\n08:00");
-            dayPartLabel2.setText(dayPartLabel2.getText() + "\n13:00");
-            dayPartLabel3.setText(dayPartLabel3.getText() + "\n18:00");
-            dayPartLabel4.setText(dayPartLabel4.getText() + "\n23:00");
-        }
-        WeatherApp.switchFullScreen(stage);
+//        Stage stage = (Stage) MainAnchorPane.getScene().getWindow();
+//        if (stage.isFullScreen()) {
+//            // FROM FULLSCREEN
+//            clipRect.setArcHeight(15);
+//            clipRect.setArcWidth(15);
+//
+//            for (Node currentLowerDataVBox : currentLowerGridPane.getChildren()) {
+//                for (Node currentDataIcon : ((VBox) currentLowerDataVBox).getChildren()) {
+//                    if (currentDataIcon instanceof ImageView) {
+//                        scaleTo(currentDataIcon, 1);
+//                        currentDataIcon.setTranslateY(0);
+//                    }
+//                }
+//            }
+//            for (Node dailyLowerDataVBox2 : dailyLowerGridPane2.getChildren()) {
+//                for (Node dailyDataIcon : ((VBox) dailyLowerDataVBox2).getChildren()) {
+//                    if (dailyDataIcon instanceof ImageView) {
+//                        scaleTo(dailyDataIcon, 1);
+//                        dailyDataIcon.setTranslateY(0);
+//                    }
+//                }
+//            }
+//            for (Node dailyLowerDataHBox : dailyLowerGridPane.getChildren()) {
+//                if (dailyLowerDataHBox instanceof HBox) {
+//                    ((HBox) dailyLowerDataHBox).setSpacing(20);
+//                    for (Node hourlyDataIcon : ((HBox) dailyLowerDataHBox).getChildren()) {
+//                        if (hourlyDataIcon instanceof ImageView) {
+//                            scaleTo(hourlyDataIcon, 1);
+//                        }
+//                    }
+//                }
+//            }
+//            scaleTo(currentIcon, .6);
+//            scaleTo(UVIcon, 1);
+//            scaleTo(moonIcon, 1);
+//            UVIcon.setTranslateY(0);
+//            moonIcon.setTranslateY(0);
+//            UVVBox.setPadding(new Insets(0, 0, 15, 0));
+//            moonVBox.setPadding(new Insets(0, 0, 15, 0));
+//
+//            for (Node node : dailyLowerGridPane.getChildren()) {
+//                if (node instanceof Label) {
+//                    ((Label) node).setAlignment(Pos.CENTER_LEFT);
+//                } else if (node instanceof HBox) {
+//                    ((HBox) node).setAlignment(Pos.CENTER);
+//                }
+//            }
+//
+//            CurrentDailyHBox.setStyle("-fx-background-radius: 10;");
+//            ForecastHBox.setStyle("-fx-background-radius: 10;");
+//            day0.setStyle("-fx-background-radius: 10 0 0 10;");
+//            day6.setStyle("-fx-background-radius: 0 10 10 0;");
+//
+//            setFonts(SFProHeavyHuge, SFProRegularUnderNormal);
+//            currentLocationLabel.setFont(SFProBoldUnderNormal);
+//            dateLabel.setFont(SFProBoldUnderNormal);
+//            for (Label label : new Label[]{dayPartLabel1, dayPartLabel2, dayPartLabel3, dayPartLabel4})
+//                label.setFont(SFProBoldUnderNormal);
+//            for (int i = 0; i < 7; i++) {
+//                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(0)).setFont(SFProBoldUnderNormal);
+//                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(2)).setFont(SFProRegularUnderNormal);
+//            }
+//
+//            dailyGridPane.getColumnConstraints().get(0).setPercentWidth(100);
+//            dailyGridPane.getColumnConstraints().get(1).setPercentWidth(0);
+//            dailyLowerGridPane2.setVisible(false);
+//            GridPane.setColumnSpan(dailyUpperGridPane, 1);
+//            GridPane.setColumnIndex(dailyMiddleGridPane, 0);
+//            GridPane.setRowIndex(dailyLowerGridPane, 2);
+//            GridPane.setRowSpan(dailyLowerGridPane, 1);
+//            if (isExpanded) {
+//                expand();
+//                isExpanded = true;
+//            }
+//
+//            dayPartLabel1.setText(dayPartLabel1.getText().substring(0, dayPartLabel1.getText().length() - 6));
+//            dayPartLabel2.setText(dayPartLabel2.getText().substring(0, dayPartLabel2.getText().length() - 6));
+//            dayPartLabel3.setText(dayPartLabel3.getText().substring(0, dayPartLabel3.getText().length() - 6));
+//            dayPartLabel4.setText(dayPartLabel4.getText().substring(0, dayPartLabel4.getText().length() - 6));
+//        } else {
+//            // TO FULLSCREEN
+//            clipRect.setArcHeight(0);
+//            clipRect.setArcWidth(0);
+//
+//            for (Node currentLowerDataVBox : currentLowerGridPane.getChildren()) {
+//                for (Node currentDataIcon : ((VBox) currentLowerDataVBox).getChildren()) {
+//                    if (currentDataIcon instanceof ImageView) {
+//                        scaleTo(currentDataIcon, 1.5);
+//                        currentDataIcon.setTranslateY(-15);
+//                    }
+//                }
+//            }
+//            for (Node dailyLowerDataVBox2 : dailyLowerGridPane2.getChildren()) {
+//                for (Node dailyDataIcon : ((VBox) dailyLowerDataVBox2).getChildren()) {
+//                    if (dailyDataIcon instanceof ImageView) {
+//                        scaleTo(dailyDataIcon, 1.5);
+//                        dailyDataIcon.setTranslateY(-15);
+//                    }
+//                }
+//            }
+//            for (Node dailyLowerDataHBox : dailyLowerGridPane.getChildren()) {
+//                if (dailyLowerDataHBox instanceof HBox) {
+//                    ((HBox) dailyLowerDataHBox).setSpacing(40);
+//                    for (Node hourlyDataIcon : ((HBox) dailyLowerDataHBox).getChildren()) {
+//                        if (hourlyDataIcon instanceof ImageView) {
+//                            scaleTo(hourlyDataIcon, 1.5);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            scaleTo(currentIcon, 1);
+//            scaleTo(UVIcon, 1.5);
+//            scaleTo(moonIcon, 1.5);
+//            UVIcon.setTranslateY(-15);
+//            moonIcon.setTranslateY(-15);
+//            UVVBox.setPadding(new Insets(0));
+//            moonVBox.setPadding(new Insets(0));
+//
+//            for (Node node : dailyLowerGridPane.getChildren()) {
+//                if (node instanceof Label) {
+//                    ((Label) node).setAlignment(Pos.CENTER);
+//                } else if (node instanceof HBox) {
+//                    ((HBox) node).setAlignment(Pos.CENTER);
+//                }
+//            }
+//
+//            CurrentDailyHBox.setStyle("-fx-background-radius: 20;");
+//            ForecastHBox.setStyle("-fx-background-radius: 20;");
+//            day0.setStyle("-fx-background-radius: 20 0 0 20;");
+//            day6.setStyle("-fx-background-radius: 0 20 20 0;");
+//
+//            setFonts(SFProHeavyFullScreen, SFProRegularNormal);
+//            currentLocationLabel.setFont(SFProBoldNormal);
+//            dateLabel.setFont(SFProBoldNormal);
+//            for (Label label : new Label[]{dayPartLabel1, dayPartLabel2, dayPartLabel3, dayPartLabel4})
+//                label.setFont(SFProBoldNormal);
+//            for (int i = 0; i < 7; i++) {
+//                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(0)).setFont(SFProBoldNormal);
+//                ((Label) ((VBox) ForecastHBox.getChildren().get(i)).getChildren().get(2)).setFont(SFProRegularNormal);
+//            }
+//            MainAnchorPane.requestFocus();
+//
+//            currentGridPane.setMaxWidth(600);
+//            AnchorPane.setLeftAnchor(CurrentDailyHBox, 330.0);
+//            AnchorPane.setRightAnchor(CurrentDailyHBox, 330.0);
+//
+//            dailyGridPane.getColumnConstraints().get(0).setPercentWidth(50);
+//            dailyGridPane.getColumnConstraints().get(1).setPercentWidth(50);
+//            dailyGridPane.getRowConstraints().get(1).setPercentHeight(20);
+//            dailyGridPane.getRowConstraints().get(2).setPercentHeight(60);
+//            GridPane.setColumnSpan(dailyUpperGridPane, 2);
+//            GridPane.setColumnIndex(dailyMiddleGridPane, 1);
+//            GridPane.setRowIndex(dailyLowerGridPane, 1);
+//            GridPane.setRowSpan(dailyLowerGridPane, 2);
+//            dailyLowerGridPane2.setVisible(true);
+//
+//            dayPartLabel1.setText(dayPartLabel1.getText() + "\n08:00");
+//            dayPartLabel2.setText(dayPartLabel2.getText() + "\n13:00");
+//            dayPartLabel3.setText(dayPartLabel3.getText() + "\n18:00");
+//            dayPartLabel4.setText(dayPartLabel4.getText() + "\n23:00");
+//        }
+//        WeatherApp.switchFullScreen(stage);
     }
 
     private void setFonts(Font bigLabelFont, Font regularLabelFont) {
@@ -1287,6 +1306,36 @@ public class AppController implements Initializable {
             stage.setX(e.getScreenX() + xOffset);
             stage.setY(e.getScreenY() + yOffset);
         }
+    }
+
+    private void runAway(Node node) {
+        Timeline fadeIn = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(node.translateYProperty(), 0)),
+                new KeyFrame(Duration.seconds(.3), new KeyValue(node.translateYProperty(), -300))
+        );
+        fadeIn.setAutoReverse(true);
+        fadeIn.play();
+    }
+
+    private void shake(Node node) {
+        Timeline fadeIn = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(node.translateXProperty(), 0)),
+                new KeyFrame(Duration.seconds(.05), new KeyValue(node.translateXProperty(), -3)),
+                new KeyFrame(Duration.seconds(.1), new KeyValue(node.translateXProperty(), 0)),
+                new KeyFrame(Duration.seconds(.15), new KeyValue(node.translateXProperty(), 3)),
+                new KeyFrame(Duration.seconds(.2), new KeyValue(node.translateXProperty(), 0))
+        );
+        fadeIn.setAutoReverse(true);
+        fadeIn.play();
+    }
+
+    private void getBack(Node node) {
+        Timeline fadeIn = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(node.translateYProperty(), -300)),
+                new KeyFrame(Duration.seconds(.3), new KeyValue(node.translateYProperty(), 0))
+        );
+        fadeIn.setAutoReverse(true);
+        fadeIn.play();
     }
 
     // Title bar buttons animation
