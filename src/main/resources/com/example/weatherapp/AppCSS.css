@@ -1,0 +1,133 @@
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Light';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-Light.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Light Italic';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-LightItalic.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Regular';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-Regular.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Regular Italic';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-RegularItalic.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Semibold';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-Semibold.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Semibold Italic';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-SemiboldItalic.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Bold';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-Bold.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Bold Italic';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-BoldItalic.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Heavy';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-Heavy.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'SF Pro Text Heavy Italic';*/
+/*    src: url('../../../fonts/SF-Pro-Text/SFProText-HeavyItalic.ttf');*/
+/*}*/
+
+#MainAnchorPane {
+    -fx-background-color: rgba(0, 0, 0, 0.01);
+}
+
+#TitleBar {
+    /*-fx-background-color: #f4f5f7;*/
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-min-width: 1500;
+    -fx-min-height: 50;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+    -fx-alignment: center;
+}
+
+#TitleBarButtons > .button, #implicitExitToggle {
+    -fx-background-radius: 50;
+    -fx-background-color: white;
+}
+
+#searchButton {
+    -fx-background-color: transparent;
+}
+
+#searchBarTextField {
+    /*-fx-font-family: 'SF Pro Text Regular';*/
+    /*-fx-font-size: 15;*/
+    -fx-accent: #41707c;
+    -fx-padding: 0 10 0 10;
+    -fx-background-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2);
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+    -fx-text-fill: white;
+    -fx-font-smoothing-type: GRAY;
+}
+
+#searchBarTextField:focused {
+    -fx-border-color: rgba(255, 255, 255, 0.5);
+}
+
+.ContentHBox {
+    -fx-background-color: rgba(0, 0, 0, .35);
+    -fx-background-radius: 10;
+}
+
+.LABEL {
+    -fx-font-smoothing-type: GRAY;
+}
+
+#HBoxSeparator .line, #dayPartSeparator {
+    -fx-border-width: 1px;
+}
+
+#dailyLowerGridPane > *, #dailyMiddleGridPane {
+    -fx-border-style: hidden;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    /*-fx-border-insets: 20;*/
+}
+
+.borderableVBox {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 0 2;
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-border-insets: 0 0 0 40;
+}
+
+#day0 {
+    -fx-background-radius: 10 0 0 10;
+}
+
+#day6 {
+    -fx-background-radius: 0 10 10 0;
+}
+
+#ForecastHBox > *:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.selectedDay {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
