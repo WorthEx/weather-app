@@ -1,5 +1,5 @@
-Karaganda,  Kazakhstan
-49.8421549
-73.10632060809252
+Ust-Kamenogorsk,  Kazakhstan
+49.956391100000005
+82.6263007323459
 false
 true
