@@ -1,6 +1,7 @@
 Для запуска требуется SDK 20+ с добавленной в Path папкой bin  
-https://download.oracle.com/java/20/archive/jdk-20.0.2_windows-x64_bin.msi  
+(https://download.oracle.com/java/20/archive/jdk-20.0.2_windows-x64_bin.msi)  
 • Исполняемый файл лежит в папке target (пропадёт, если перезапустить сборку через IDE)  
+(Исполняемый файл залит в Google Drive: https://drive.google.com/drive/folders/1pxTEDS6jRT_yTACmAaNf0m9SxOMAd1xQ?usp=sharing)  
 • Файл default.txt обязательно должен располагаться в той же директории, что и исполняемый файл  
 
 Текстовое поле  
