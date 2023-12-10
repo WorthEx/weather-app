@@ -1,5 +1,5 @@
-Karaganda,  Kazakhstan
-49.8421549
-73.10632060809252
-true
+France
+46.603354
+1.8883335
+false
 true

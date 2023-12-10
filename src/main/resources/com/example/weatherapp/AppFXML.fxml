@@ -37,7 +37,7 @@
                         <Insets left="5.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <Region fx:id="upperRegion1" minWidth="38.0" prefHeight="55.0" prefWidth="59.0" HBox.hgrow="ALWAYS" />
+                <Region fx:id="upperRegion1" minWidth="0.0" prefHeight="55.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                 <AnchorPane fx:id="searchBarAnchorPane" maxWidth="415.0" prefHeight="50.0" prefWidth="415.0">
                     <children>
                         <TextField fx:id="searchBarTextField" alignment="CENTER" layoutY="11.0" maxWidth="415.0" minWidth="415.0" prefHeight="30.0" prefWidth="415.0" promptText="Enter location (e.g. Osaka, Japan)">
@@ -45,8 +45,8 @@
                         <Button fx:id="searchButton" layoutX="394.0" layoutY="19.0" maxHeight="15.0" maxWidth="15.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" onAction="#searchLocation" prefHeight="15.0" prefWidth="15.0" />
                     </children>
                 </AnchorPane>
-                <Region minWidth="102.0" prefHeight="55.0" prefWidth="102.0" HBox.hgrow="ALWAYS" />
-                <HBox fx:id="TitleBarButtons" alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="1.7976931348623157E308" minWidth="100.0" prefHeight="50.0" prefWidth="114.0" spacing="9.0" HBox.hgrow="NEVER">
+                <Region minWidth="93.0" prefHeight="55.0" prefWidth="93.0" HBox.hgrow="ALWAYS" />
+                <HBox fx:id="TitleBarButtons" alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="1.7976931348623157E308" minWidth="82.0" prefHeight="50.0" prefWidth="82.0" spacing="9.0" HBox.hgrow="NEVER">
                     <children>
                         <ToggleButton fx:id="implicitExitToggle" maxHeight="18.0" maxWidth="18.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="18.0" text="*">
                             <cursor>
@@ -55,8 +55,10 @@
                         </ToggleButton>
                         <Button id="MinimizeButton" fx:id="MinimizeButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#minimize" prefHeight="18.0" prefWidth="18.0">
                         </Button>
-                        <Button id="FullScreenButton" fx:id="FullScreenButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="18.0" />
-                        <Button id="ExitButton" fx:id="ExitButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#exit" prefHeight="18.0" prefWidth="18.0" styleClass="button" />
+                        <Button id="ExitButton" fx:id="ExitButton" alignment="CENTER_RIGHT" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#exit" prefHeight="18.0" prefWidth="18.0" styleClass="button" textFill="RED">
+                     <font>
+                        <Font name="Arial Bold" size="1.0" />
+                     </font></Button>
                     </children>
                 </HBox>
             </children>

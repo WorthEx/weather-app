@@ -7,11 +7,12 @@ import com.example.weatherapp.dataClasses.MoonhaseData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import javafx.animation.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
@@ -39,7 +40,6 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 
 public class AppController implements Initializable {
@@ -54,7 +54,6 @@ public class AppController implements Initializable {
     public Rectangle clipRect = new Rectangle();
     private Tooltip CApproximateTemp;
     private boolean isPressureInhPa;
-    Timer timer = new Timer();
     protected boolean isExpanded = false;
     private int selectedDay = 0;
 
@@ -206,8 +205,6 @@ public class AppController implements Initializable {
     @FXML
     private ImageView nighttimeWeatherIcon;
     @FXML
-    private Label clockLabel;
-    @FXML
     private VBox day0;
     @FXML
     private ImageView day0Icon;
@@ -229,12 +226,9 @@ public class AppController implements Initializable {
     // Fonts
     Font SFProLightUnderNormal = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Light.ttf")), fontSizeNormal - 5);
     Font SFProRegularSmall = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Regular.ttf")), fontSizeSmall);
-    Font SFProRegularNormal = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Regular.ttf")), fontSizeNormal);
     Font SFProRegularUnderNormal = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Regular.ttf")), fontSizeNormal - 5);
-    Font SFProBoldNormal = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Bold.ttf")), fontSizeNormal);
     Font SFProBoldUnderNormal = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Bold.ttf")), fontSizeNormal - 5);
     Font SFProHeavyHuge = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Heavy.ttf")), fontSizeHuge);
-    Font SFProHeavyFullScreen = Font.loadFont(Objects.requireNonNull(WeatherApp.class.getResourceAsStream("/fonts/SF-Pro-Text/SFProText-Heavy.ttf")), fontSizeFullScreen);
 
     // Initialization method
     @Override
@@ -270,43 +264,6 @@ public class AppController implements Initializable {
                 node.setOnMouseExited(event -> outTransition(node));
             }
         }
-        AtomicLong FSLastCall = new AtomicLong();
-        //
-        FullScreenButton.setFocusTraversable(false);
-        FullScreenButton.setOnMouseEntered(event -> {
-            long coolDown = 500;
-            long time = System.currentTimeMillis();
-            if (time > FSLastCall.get() + coolDown) {
-                shake(FullScreenButton);
-                final Animation animation = new Transition() {
-                    {
-                        setCycleDuration(Duration.millis(200));
-                        setInterpolator(Interpolator.EASE_OUT);
-                    }
-
-                    @Override
-                    protected void interpolate(double frac) {
-                        Color vColor = Color.web("F3455C", .8);
-                        FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
-                    }
-                };
-                animation.play();
-                FSLastCall.set(time);
-                FullScreenButton.setMinWidth(19);
-                FullScreenButton.setMinHeight(19);
-                MainAnchorPane.requestFocus();
-            }
-
-        });
-        FullScreenButton.setOnMouseExited(e -> {
-            Color vColor = Color.web("FFFFFF", 1);
-            FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
-        });
-        TitleBarButtons.setOnMouseExited(e -> {
-            Color vColor = Color.web("FFFFFF", 1);
-            FullScreenButton.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(50), Insets.EMPTY)));
-        });
-        //
 
         currentPressureVBox.setOnMouseEntered(event -> upTransition(currentPressureVBox));
         currentPressureVBox.setOnMouseExited(event -> downTransition(currentPressureVBox));

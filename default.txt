@@ -1,5 +1,5 @@
-Ust-Kamenogorsk,  Kazakhstan
-49.956391100000005
-82.6263007323459
+France
+46.603354
+1.8883335
 false
 true
