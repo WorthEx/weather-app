@@ -272,6 +272,7 @@ public class AppController implements Initializable {
         }
         AtomicLong FSLastCall = new AtomicLong();
         //
+        FullScreenButton.setFocusTraversable(false);
         FullScreenButton.setOnMouseEntered(event -> {
             long coolDown = 500;
             long time = System.currentTimeMillis();
@@ -291,6 +292,9 @@ public class AppController implements Initializable {
                 };
                 animation.play();
                 FSLastCall.set(time);
+                FullScreenButton.setMinWidth(19);
+                FullScreenButton.setMinHeight(19);
+                MainAnchorPane.requestFocus();
             }
 
         });
